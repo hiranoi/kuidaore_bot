@@ -6,7 +6,7 @@ class ConvertToOsaka
   end
 
   def convert
-    d = YAML.load_file('osaka.yml')
+    d = YAML.load_file('./osaka.yml')
     # 文章にhashのキーが含まれているかを確認する
     d.each do |k, v|
       # 一致すればvalueに置換する
