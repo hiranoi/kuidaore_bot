@@ -1,10 +1,10 @@
 class WebhookController < ApplicationController
   protect_from_forgery except: :callback # CSRF対策無効化
 
-  CHANNEL_ID = nil#ENV['LINE_CHANNEL_ID']
-  CHANNEL_SECRET = nil#ENV['LINE_CHANNEL_SECRET']
-  CHANNEL_MID = #ENV['LINE_CHANNEL_MID']
-  OUTBOUND_PROXY = #ENV['LINE_OUTBOUND_PROXY']
+  CHANNEL_ID = ENV['LINE_CHANNEL_ID']
+  CHANNEL_SECRET = ENV['LINE_CHANNEL_SECRET']
+  CHANNEL_MID = ENV['LINE_CHANNEL_MID']
+  OUTBOUND_PROXY = ENV['LINE_OUTBOUND_PROXY']
 
   def callback
     unless is_validate_signature
