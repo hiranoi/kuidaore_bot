@@ -5,6 +5,7 @@ class WebhookController < ApplicationController
   CHANNEL_SECRET = ENV['LINE_CHANNEL_SECRET']
   CHANNEL_MID = ENV['LINE_CHANNEL_MID']
   OUTBOUND_PROXY = ENV['LINE_OUTBOUND_PROXY']
+  REPL_API_KEY = ENV['REPL_API_KEY']
 
   def callback
     unless is_validate_signature
@@ -12,12 +13,12 @@ class WebhookController < ApplicationController
     end
     result = params[:result][0]
     logger.info({from_line: result})
-    text_message = result['content']['text']
-    from_mid =result['content']['from']
+
+    req_message = result['content']['text']
+    from_mid = result['content']['from']
 
     client = LineClient.new(CHANNEL_ID, CHANNEL_SECRET, CHANNEL_MID, OUTBOUND_PROXY)
-    #ooska = ConvertToOSAKA.new(text_message)
-    res = client.send([from_mid], ConvertToOsaka.new(text_message).convert)
+    res = client.send([from_mid], ConvertToOsaka.new(req_message).convert)
 
     if res.status == 200
       logger.info({success: res})
