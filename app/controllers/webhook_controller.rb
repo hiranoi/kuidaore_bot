@@ -21,7 +21,7 @@ class WebhookController < ApplicationController
     res_message = repl_client.get_message('uzQWHcjUNYoJCSaongHabkPHA3xh7lba', req_message)
 
     client = LineClient.new(CHANNEL_ID, CHANNEL_SECRET, CHANNEL_MID, OUTBOUND_PROXY)
-    res = client.send([from_mid], ConvertToOsaka.new(res_message).convert)
+    res = client.send([from_mid], ConvertToOsaka.new(res_message['systemText']['expression']).convert)
 
     if res.status == 200
       logger.info({success: res})
