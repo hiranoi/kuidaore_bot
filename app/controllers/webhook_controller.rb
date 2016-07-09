@@ -17,7 +17,7 @@ class WebhookController < ApplicationController
 
     client = LineClient.new(CHANNEL_ID, CHANNEL_SECRET, CHANNEL_MID, OUTBOUND_PROXY)
     #ooska = ConvertToOSAKA.new(text_message)
-    res = client.send([from_mid], text_message)
+    res = client.send([from_mid], ConvertToOsaka.new(text_message).convert)
 
     if res.status == 200
       logger.info({success: res})

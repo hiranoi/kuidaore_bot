@@ -21,7 +21,7 @@ class LineClient
   TO_CHANNEL = 1383378250 # this is fixed value
   EVENT_TYPE = "138311608800106203" # this is fixed value
 
-  def initialize(channel_id, channel_secret, channel_mid, proxy = nil)
+  def initialize(channel_id, channel_secret, channel_mid, proxy)
     @channel_id = channel_id
     @channel_secret = channel_secret
     @channel_mid = channel_mid
