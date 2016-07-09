@@ -1,10 +1,10 @@
 class WebhookController < ApplicationController
   protect_from_forgery with: :null_session # CSRF対策無効化
 
-  CHANNEL_ID = ENV['LINE_CHANNEL_ID']
-  CHANNEL_SECRET = ENV['LINE_CHANNEL_SECRET']
-  CHANNEL_MID = ENV['LINE_CHANNEL_MID']
-  OUTBOUND_PROXY = ENV['LINE_OUTBOUND_PROXY']
+  CHANNEL_ID = nil#ENV['LINE_CHANNEL_ID']
+  CHANNEL_SECRET = nil#ENV['LINE_CHANNEL_SECRET']
+  CHANNEL_MID = #ENV['LINE_CHANNEL_MID']
+  OUTBOUND_PROXY = #ENV['LINE_OUTBOUND_PROXY']
 
   def callback
     unless is_validate_signature
@@ -31,13 +31,10 @@ class WebhookController < ApplicationController
   # 認証に成功すればtrueを返す。
   # ref) https://developers.line.me/bot-api/getting-started-with-bot-api-trial#signature_validation
   def is_validate_signature
-    true
-=begin
     signature = request.headers["X-LINE-ChannelSignature"]
     http_request_body = request.raw_post
     hash = OpenSSL::HMAC::digest(OpenSSL::Digest::SHA256.new, CHANNEL_SECRET, http_request_body)
     signature_answer = Base64.strict_encode64(hash)
     signature == signature_answer
-=end
   end
 end
