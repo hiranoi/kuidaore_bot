@@ -13,13 +13,14 @@ class ReplAiClient
   end
 
   def get_user_id
-    post('/v1/registration',{
+    res = post('/v1/registration',{
       botId: @bot_id
       })
+    res.body
   end
 
   def get_message(user_id, message)
-    post('/v1/dialogue',{
+    res = post('/v1/dialogue',{
         appUserId: user_id,
         botId: @bot_id,
         voiceText: message,
@@ -28,6 +29,7 @@ class ReplAiClient
         appRecvTime: Time.now.strftime('%Y/%m/%d %H:%M:%S'),
         appSendTime: Time.now.strftime('%Y/%m/%d %H:%M:%S'),
       })
+    res.body
   end
 
   private
