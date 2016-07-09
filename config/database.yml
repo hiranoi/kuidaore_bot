@@ -23,6 +23,5 @@ test:
 production:
   <<: *default
   adapter: postgresql
-  url: <%= ENV['HEROKU_POSTGRESQL_BLACK_URL'] %>
   encoding: unicode
   pool: 5
