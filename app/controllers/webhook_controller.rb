@@ -1,5 +1,5 @@
 class WebhookController < ApplicationController
-  protect_from_forgery with: :null_session # CSRF対策無効化
+  protect_from_forgery except: :callback # CSRF対策無効化
 
   CHANNEL_ID = nil#ENV['LINE_CHANNEL_ID']
   CHANNEL_SECRET = nil#ENV['LINE_CHANNEL_SECRET']
